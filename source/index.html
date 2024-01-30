@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>正常的标题</title>
+	<script>
+        function displayCurrentTime() {
+			var currentDateTime = new Date();
+            var year = currentDateTime.getFullYear();
+            var month = (currentDateTime.getMonth() + 1).toString().padStart(2, '0');
+            var day = currentDateTime.getDate().toString().padStart(2, '0');
+            var hours = currentDateTime.getHours().toString().padStart(2, '0');
+            var minutes = currentDateTime.getMinutes().toString().padStart(2, '0');
+            var seconds = currentDateTime.getSeconds().toString().padStart(2, '0');
+
+            var dateTimeString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+
+            // 更新页面上的日期和时间
+            document.getElementById("current-date-time").innerHTML = dateTimeString;
+
+            // 每隔一秒调用一次该函数
+            setTimeout(displayCurrentTime, 1000);
+        }
+    </script>
+</head>
+<body onload="displayCurrentTime();">
+	<p class="big-font" style="font-size: 50px;">
+        查看图片：
+        <a href="http://localhost:8080/pic.html" target="_blank">点击这里</a>
+    </p>
+	<hr />
+    <p class="big-font" style="font-size: 50px;">
+        发送Post请求：
+        <a href="http://localhost:8080/post.html" target="_blank">点击这里</a>
+    </p>
+	<hr />
+	<p style="font-size: 50px;">
+        当前时间：<span id="current-date-time"></span>
+    </p>
+
+	<hr />
+    <em>Alfred's WebServer</em>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发送POST请求示例</title>
+</head>
+<body>
+
+    <h1>发送POST请求示例</h1>
+
+    <form id="myForm">
+        <label for="data">要发送的数据：</label>
+        <input type="text" id="data" name="data" required>
+        <br>
+        <button type="button" onclick="postData()">发送POST请求</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        function postData() {
+            var formData = new FormData(document.getElementById("myForm"));
+
+            fetch('http://localhost:8080/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())  // 使用text()方法获取原始文本数据
+            .then(data => {
+                // 直接显示原始数据
+                // document.getElementById("response").innerHTML = "服务器响应：" + data;
+                document.getElementById("response").textContent = "服务器响应：" + data;
+            })
+            .catch(error => {
+                // 处理错误
+                // document.getElementById("response").innerHTML = "发生错误：" + error.message;
+                document.getElementById("response").textContent = "发生错误：" + error.message;
+            });
+        }
+    </script>
+
+</body>
+</html>
