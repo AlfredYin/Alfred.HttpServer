@@ -90,7 +90,7 @@ void EventLoopThread::threadFunc()
 	{
 		// 创建一个独占锁，并使用 mutex_ 进行加锁。
 		std::unique_lock<std::mutex> lock(mutex_);
-		//*EventLoopThread::startLoopop_ = &loop;
+		loop_ = &loop;
 		// 通过条件变量 cond_ 通知正在等待的线程，即 EventLoopThread::startLoop 函数中的等待条件。
 		cond_.notify_one();
 

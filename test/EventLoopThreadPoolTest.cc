@@ -29,20 +29,20 @@ int main(int argc, char *argv[])
 	webserver::EventLoop loop;
 	
 	// 主线程开启线程池
-	{
-		printf("Single thread %p:\n", &loop);
+	// {
+	// 	printf("Single thread %p:\n", &loop);
 
-		// 创建线程池，将主事件循环传入
-		webserver::EventLoopThreadPool model(&loop, 0);
+	// 	// 创建线程池，将主事件循环传入
+	// 	webserver::EventLoopThreadPool model(&loop, 0);
 
-		// 在主线程中执行 init函数
-		model.start(init);
+	// 	// 在主线程中执行 init函数
+	// 	model.start(init);
 
-		// 没有创建子线程 仍然是返回的是 主线程的 事件循环
-		assert(model.getNextLoop() == &loop);
-		assert(model.getNextLoop() == &loop);
-		assert(model.getNextLoop() == &loop);
-	}
+	// 	// 没有创建子线程 仍然是返回的是 主线程的 事件循环
+	// 	assert(model.getNextLoop() == &loop);
+	// 	assert(model.getNextLoop() == &loop);
+	// 	assert(model.getNextLoop() == &loop);
+	// }
 	
 	{
 		printf("Another thread:\n");
@@ -57,20 +57,18 @@ int main(int argc, char *argv[])
 		assert(nextLoop == model.getNextLoop());
 	}
 	
-	{
-		printf("Three threads:\n");
-		webserver::EventLoopThreadPool model(&loop, 3);
-		model.start(init);
-		webserver::EventLoop* nextLoop = model.getNextLoop();
-		nextLoop->runInLoop(std::bind(print, nextLoop));
-		assert(nextLoop != &loop);
-		assert(nextLoop != model.getNextLoop());
-		assert(nextLoop != model.getNextLoop());
-		assert(nextLoop == model.getNextLoop());
-
-		printf("aaaaaaaaaaaaaaaaaaaaaaa\n");
-	}
+	// {
+	// 	printf("Three threads:\n");
+	// 	webserver::EventLoopThreadPool model(&loop, 3);
+	// 	model.start(init);
+	// 	webserver::EventLoop* nextLoop = model.getNextLoop();
+	// 	nextLoop->runInLoop(std::bind(print, nextLoop));
+	// 	assert(nextLoop != &loop);
+	// 	assert(nextLoop != model.getNextLoop());
+	// 	assert(nextLoop != model.getNextLoop());
+	// 	assert(nextLoop == model.getNextLoop());
+	// }
 	
-	// loop.loop();
+	loop.loop();
 	return 0;
 }

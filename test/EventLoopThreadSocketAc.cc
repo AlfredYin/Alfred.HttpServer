@@ -46,7 +46,6 @@ printf("Main pid = %d \n",pid);
     return -1;
 }
 
-// 
 void acceptor(int listenfd,webserver::EventLoopThreadPool *threadPool){
 
     printf("acceptor(%d)\n",listenfd);
